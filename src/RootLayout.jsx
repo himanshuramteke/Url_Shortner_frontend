@@ -2,7 +2,7 @@
 import './App.css'
 import { HomePage } from './pages/HomePage'
 
-function App() {
+function RootLayout() {
   
   return (
     <>
@@ -11,4 +11,4 @@ function App() {
   )
 }
 
-export default App
+export default RootLayout;
