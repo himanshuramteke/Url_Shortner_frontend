@@ -1,26 +1,51 @@
 import axiosInstance from "../utils/axiosInstance";
 
 export const loginUserApi = async (email, password) => {
-    const {data} = await axiosInstance.post('/api/v1/auth', {email, password});
-    return data;
+    try {
+        const {data} = await axiosInstance.post('/api/v1/auth', {email, password});
+        return data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
 };
 
 export const registerUserApi = async (name, password, email) => {
-    const {data} = await axiosInstance.post('/api/auth/register', {name, password, email});
-    return data;
+   try {
+        const {data} = await axiosInstance.post('/api/v1/auth/register', {name, password, email});
+        return data;
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
 }
 
 export const logoutUserApi = async () => {
-    const {data} = await axiosInstance.get("/api/auth/logout")
-    return data
+    try {
+        const {data} = await axiosInstance.get("/api/v1/auth/logout")
+        return data
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
 }
 
 export const getCurrentUserApi = async () => {
-    const {data} = await axiosInstance.get("/api/auth/me")
-    return data
+   try {
+        const {data} = await axiosInstance.get("/api/v1/auth/me")
+        return data
+    } catch (error) {
+        console.log(error)
+        throw error;
+   }
 }
 
 export const getAllUserUrlsApi = async () => {
-    const {data} = await axiosInstance.post("/api/user/urls")
-    return data
+    try {
+        const {data} = await axiosInstance.post("/api/v1/user/urls")
+        return data
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
 }

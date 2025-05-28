@@ -1,14 +1,14 @@
-
-import './App.css'
-import { HomePage } from './pages/HomePage'
+import { Outlet } from "@tanstack/react-router";
+import "./App.css";
+import { NavBar } from "./components/NavBar";
 
 function RootLayout() {
-  
   return (
     <>
-      <HomePage />
+      <NavBar />
+      <Outlet />
     </>
-  )
+  );
 }
 
 export default RootLayout;
