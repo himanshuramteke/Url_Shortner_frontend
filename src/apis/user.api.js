@@ -2,7 +2,7 @@ import axiosInstance from "../utils/axiosInstance";
 
 export const loginUserApi = async (email, password) => {
     try {
-        const {data} = await axiosInstance.post('/api/v1/auth', {email, password});
+        const {data} = await axiosInstance.post('/api/v1/auth/login', {email, password});
         return data;
     } catch (error) {
         console.log(error);

@@ -41,7 +41,7 @@ export const UserUrl = () => {
       </div>
     );
   }
-
+console.log(urls.urls)
   if (!urls.urls || urls.urls.length === 0) {
     return (
       <div className="text-center text-gray-500 my-6 p-4 bg-gray-50 rounded-lg border border-gray-200">

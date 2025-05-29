@@ -19,7 +19,7 @@ export const LoginForm = ({ state }) => {
         setError('');
 
         try {
-            const data = await loginUserApi(password, email);
+            const data = await loginUserApi(email, password);
             dispatch(login(data.user))
             navigate({to:"/dashboard"})
             setLoading(false);
