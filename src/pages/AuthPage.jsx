@@ -1,13 +1,19 @@
-import { useState } from "react"
+import { useState } from "react";
 import { LoginForm } from "../components/LoginForm";
 import { RegisterForm } from "../components/RegisterForm";
+import { useRouterState } from "@tanstack/react-router";
 
 export const AuthPage = () => {
-    const [login, setLogin] = useState(true);
+  const routerState = useRouterState();
+  const [isLogin, setIsLogin] = useState(!routerState.location.state?.showRegister);
 
-    return (
-        <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-          {login ? <LoginForm state={setLogin}/> : <RegisterForm state={setLogin}/>}
-        </div>
-    )
+  return (
+    <>
+      {isLogin ? (
+        <LoginForm onSwitchAuth={() => setIsLogin(false)}/>
+      ): (
+        <RegisterForm onSwitchAuth={() => setIsLogin(true)}/>
+      )}
+    </>
+  )
 }

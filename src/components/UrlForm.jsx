@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createShortUrlApi } from "../apis/shortUrl.api";
-import { QueryClient } from "@tanstack/react-query";
 import { queryClient } from "../main";
 
 export const UrlForm = () => {
-  const [url, setUrl] = useState("https://www.google.com");
+  const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState();
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(null);
@@ -32,42 +31,40 @@ export const UrlForm = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div>
-        <label
-          htmlFor="url"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
+        <label htmlFor="url" className="block text-sm font-medium text-gray-300 mb-2">
           Enter your URL
         </label>
-        <input
-          type="url"
-          id="url"
-          value={url}
-          onInput={(event) => setUrl(event.target.value)}
-          placeholder="https://example.com"
-          required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <div className="flex rounded-md shadow-sm">
+          <input
+            type="url"
+            id="url"
+            value={url}
+            onInput={(event) => setUrl(event.target.value)}
+            placeholder="https://example.com"
+            required
+            className="flex-1 bg-gray-700 text-gray-200 border border-gray-600 rounded-l-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+          />
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="inline-flex items-center px-6 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-medium rounded-r-md hover:from-purple-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+          >
+            Shorten
+          </button>
+        </div>
       </div>
-      <button
-        onClick={handleSubmit}
-        type="submit"
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
-      >
-        Shorten URL
-      </button>
+
       {error && (
-        <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
+        <div className="p-3 bg-red-900/30 text-red-300 rounded-md border border-red-700/50">
           {error}
         </div>
       )}
+
       {isAuthenticated && (
-        <div className="mt-4">
-          <label
-            htmlFor="customSlug"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+        <div>
+          <label htmlFor="customSlug" className="block text-sm font-medium text-gray-300 mb-2">
             Custom URL (optional)
           </label>
           <input
@@ -76,26 +73,27 @@ export const UrlForm = () => {
             value={customSlug}
             onChange={(event) => setCustomSlug(event.target.value)}
             placeholder="Enter custom slug"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-gray-700 text-gray-200 border border-gray-600 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
           />
         </div>
       )}
+
       {shortUrl && (
         <div className="mt-6">
-          <h2 className="text-lg font-semibold mb-2">Your shortened URL:</h2>
-          <div className="flex items-center">
+          <h2 className="text-lg font-semibold text-gray-200 mb-3">Your shortened URL:</h2>
+          <div className="flex rounded-md shadow-sm">
             <input
               type="text"
               readOnly
               value={shortUrl}
-              className="flex-1 p-2 border border-gray-300 rounded-l-md bg-gray-50"
+              className="flex-1 bg-gray-700 text-gray-200 border border-gray-600 rounded-l-md py-2 px-4 truncate"
             />
             <button
               onClick={handleCopy}
-              className={`px-4 py-2 rounded-r-md transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-r-md transition-all duration-200 ${
                 copied
-                  ? "bg-green-500 text-white hover:bg-green-600"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "bg-green-600 text-white"
+                  : "bg-gray-600 text-gray-200 hover:bg-gray-500"
               }`}
             >
               {copied ? "Copied!" : "Copy"}

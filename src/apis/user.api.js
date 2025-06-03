@@ -50,3 +50,14 @@ export const getAllUserUrlsApi = async () => {
         throw error;
     }
 }
+
+export const deleteUrlApi = async (urlId) => {
+    try {
+        const response = await axiosInstance.delete(`/api/user/${urlId}`);
+        console.log("Url deleted successfully", `${urlId}`);
+        return response.data;
+    } catch (error) {
+        console.log("Error while deleting Url", error);
+        throw error;
+    }
+}
